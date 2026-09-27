@@ -12,6 +12,10 @@ Add vectors, adjust their start and end points with sliders, and watch them upda
 - **Orbiting camera**: the view rotates around the origin; zoom with the mouse wheel
 - **Cross-platform**: runs on Linux, Windows and macOS
 
+## Demo
+
+![Demo](demo.gif)
+
 ## Requirements
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)

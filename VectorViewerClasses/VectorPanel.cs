@@ -23,12 +23,12 @@ public class VectorPanel
 
         DrawRectangle(0, 0, Width, GetScreenHeight(), Fade(Color.White, 0.85f));
 
-        if (Button(new Rectangle(10, 10 + margin, 130, 36), "+ Vektor"))
+        if (Button(new Rectangle(10, 10 + margin, 130, 36), "+ Vector"))
         {
             Vectors.Add(new Vec (Vector3.Zero ,new Vector3(1, 1, 1), Palette[Vectors.Count % Palette.Length] ));
             Selected = Vectors.Count - 1;
         }
-        if (Selected >= 0 && Button(new Rectangle(150, 10 + margin, 130, 36), "Entfernen"))
+        if (Selected >= 0 && Button(new Rectangle(150, 10 + margin, 130, 36), "- Delete"))
         {
             Vectors.RemoveAt(Selected);
             Selected = Vectors.Count - 1;
@@ -37,15 +37,15 @@ public class VectorPanel
         if (Selected >= 0)
         {
             var v = Vectors[Selected];
-            float fromX = Slider(0, 100, "Von X", v.Start.X, Color.Red);
-            float fromY = Slider(1, 145, "Von Y", v.Start.Y, Color.DarkGreen);
-            float fromZ = Slider(2, 190, "Von Z", v.Start.Z, Color.Blue);
-            float endX = Slider(3, 235, "Bis X", v.End.X, Color.Red);
-            float endY = Slider(4, 280, "Bis Y", v.End.Y, Color.DarkGreen);
-            float endZ = Slider(5, 325, "Bis Z", v.End.Z, Color.Blue);
+            float fromX = Slider(0, 100, "Start X", v.Start.X, Color.Red);
+            float fromY = Slider(1, 145, "Start Y", v.Start.Y, Color.DarkGreen);
+            float fromZ = Slider(2, 190, "Start Z", v.Start.Z, Color.Blue);
+            float endX = Slider(3, 235, "End X", v.End.X, Color.Red);
+            float endY = Slider(4, 280, "End Y", v.End.Y, Color.DarkGreen);
+            float endZ = Slider(5, 325, "End Z", v.End.Z, Color.Blue);
             v.Start = new Vector3(fromX, fromY, fromZ);
             v.End = new Vector3(endX, endY, endZ);
-            DrawText($"Laenge: {Fmt(v.End.Length())}", 12, 380, 18, Color.DarkGray);
+            DrawText($"Length: {Fmt(v.End.Length())}", 12, 380, 18, Color.DarkGray);
         }
 
         for (int i = 0; i < Vectors.Count; i++)
