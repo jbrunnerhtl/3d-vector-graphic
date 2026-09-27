@@ -15,12 +15,8 @@ var camera = new Camera3D {
     FovY = 45,
     Projection = CameraProjection.Perspective
 };
+var panel = new VectorPanel();
 
-var vectors = new List<(Vector3, Vector3, Color)> {
-    (Vector3.Zero, new Vector3(1, 2, 10), Color.Red),
-    (Vector3.Zero, new Vector3(-2, 1, 1), Color.Blue),
-    (new Vector3(1, 2, 3), new Vector3(-1, 3, 4), Color.DarkGreen),
-};
 
 while (!WindowShouldClose())
 {
@@ -30,12 +26,13 @@ while (!WindowShouldClose())
     ClearBackground(Color.RayWhite);
     
 
-    GridSetup.SetupGrid([.. vectors.Select(s => (s.Item1, s.Item2))], camera);
+    GridSetup.SetupGrid(panel.Vectors.Count == 0 ? [] : [.. panel.Vectors.Select(s => (s.Start, s.End))], camera);
     BeginMode3D(camera);
-    foreach (var (start, end, color) in vectors)
-        end.DrawArrow(start, color);
+    foreach (var vec in panel.Vectors)
+        vec.End.DrawArrow(vec.Start, vec.Color);
 
     EndMode3D();
+    panel.Draw();
     DrawText("Mouse wheel: zoom", 10, 10, 20, Color.DarkGray);
     EndDrawing();
 }

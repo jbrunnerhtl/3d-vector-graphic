@@ -10,11 +10,12 @@ public static class GridSetup
     {
         var width = vectors.Count == 0 ? 5f : vectors.Max(v => MathF.Max(MathF.Abs(v.Item1.X) + MathF.Abs(v.Item2.X), MathF.Abs(v.Item1.Z) + MathF.Abs(v.Item2.Z)));
         BeginMode3D(camera);
-        DrawGrid(((int)width)*2, 1);
-        var height = vectors.Max(v => MathF.Max(MathF.Abs(v.Item1.Y), MathF.Abs(v.Item2.Y)));
+        int half = (int)MathF.Ceiling(width) + 1;
+        DrawGrid(half*2, 1);
+        var height = vectors.Count == 0 ? 5f : vectors.Max(v => MathF.Max(MathF.Abs(v.Item1.Y), MathF.Abs(v.Item2.Y))) + 1;
         DrawLine3D(Vector3.Zero, new Vector3(0, (int)height, 0), Color.Gray);
+        DrawLine3D(Vector3.Zero, new Vector3(0, height * -1, 0), Color.Gray);
         EndMode3D();
-        int half = (int)MathF.Ceiling(width);
         for (int i = -half; i <= half; i++)
         {
             if (i == 0) continue;
