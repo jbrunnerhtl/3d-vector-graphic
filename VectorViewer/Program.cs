@@ -17,7 +17,7 @@ var camera = new Camera3D {
 };
 
 var vectors = new List<(Vector3, Vector3, Color)> {
-    (Vector3.Zero, new Vector3(1, 2, 3), Color.Red),
+    (Vector3.Zero, new Vector3(1, 2, 10), Color.Red),
     (Vector3.Zero, new Vector3(-2, 1, 1), Color.Blue),
     (new Vector3(1, 2, 3), new Vector3(-1, 3, 4), Color.DarkGreen),
 };
@@ -28,10 +28,10 @@ while (!WindowShouldClose())
 
     BeginDrawing();
     ClearBackground(Color.RayWhite);
+    
+
+    GridSetup.SetupGrid([.. vectors.Select(s => (s.Item1, s.Item2))], camera);
     BeginMode3D(camera);
-
-    GridSetup.SetupGrid([.. vectors.Select(s => (s.Item1, s.Item2))]);
-
     foreach (var (start, end, color) in vectors)
         end.DrawArrow(start, color);
 
